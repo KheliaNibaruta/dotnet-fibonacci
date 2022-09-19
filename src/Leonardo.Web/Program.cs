@@ -3,8 +3,7 @@ var app = builder.Build();
 
 //app.MapGet("/", () => "Hello World!");
 
-app.MapGet("/Fibonacci", 
-    async () => Leonardo.Fibonacci.RunAsync(new []{"44", "43"}));
+app.MapGet("/Fibonacci", () => Task.FromResult(Leonardo.Fibonacci.RunAsync(new []{"44", "43"})));
 
 app.Run();
 
