@@ -6,3 +6,5 @@ var app = builder.Build();
 app.MapGet("/Fibonacci", 
     async () => Leonardo.Fibonacci.RunAsync(new []{"44", "43"}));
 
+app.Run();
+
