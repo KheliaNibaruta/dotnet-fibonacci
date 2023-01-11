@@ -8,19 +8,17 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-var services = new ServiceCollection();
-services.AddTransient<Fibonacci>();
-services.AddTransient<FibonacciDataContext>();
-services.AddDbContext<FibonacciDataContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-services.AddLogging(configure => configure.AddConsole());
-
 var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
 IConfiguration configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
     .AddEnvironmentVariables().AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile($"appsettings.{environmentName}.json", optional: true, reloadOnChange: true)    .Build();
 
-
+var services = new ServiceCollection();
+services.AddTransient<Fibonacci>();
+services.AddTransient<FibonacciDataContext>();
+services.AddDbContext<FibonacciDataContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+services.AddLogging(configure => configure.AddConsole());
 
 var applicationSection = configuration.GetSection("Application");
 var applicationConfig = applicationSection.Get<ApplicationConfig>();
@@ -51,7 +49,6 @@ using (var serviceProvider = services.BuildServiceProvider())
 //     if (i <= 2) return 1;
 //     return Fib(i - 1) + Fib(i - 2);
 // }  
-}
 
 namespace Demo
 {
