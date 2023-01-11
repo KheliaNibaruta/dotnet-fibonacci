@@ -8,8 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
+var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 IConfiguration configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
     .AddEnvironmentVariables().AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
     .AddJsonFile($"appsettings.{environmentName}.json", optional: true, reloadOnChange: true)    .Build();
@@ -48,7 +48,7 @@ using (var serviceProvider = services.BuildServiceProvider())
 // {
 //     if (i <= 2) return 1;
 //     return Fib(i - 1) + Fib(i - 2);
-// }  
+// }
 
 namespace Demo
 {
